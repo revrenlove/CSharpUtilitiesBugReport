@@ -1,12 +1,14 @@
-using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using RevrenLove.CSharpUtilitiesBugReport;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
-    .ConfigureServices(services => {
-        services.AddApplicationInsightsTelemetryWorkerService();
-        services.ConfigureFunctionsApplicationInsights();
+    .ConfigureServices(services =>
+    {
+        services
+            .AddAppSettings()
+            .AddSingleton<EmailClient>();
     })
     .Build();
 
